@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Tutorial</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+</head>
+<body ng-controller="StudentController">
+
+	<div class="page-wrapper">
+
+		<section class="left-side-content">
+			<div class="left-side-inner">
+				<header style="margin-bottom: 10px;">
+					<div class="row">
+						<div class="col-lg-6">
+							<h4>Student List</h4>
+						</div>
+						<div class="col-lg-6">
+							<button class="btn btn-primary registerButton">New Student</button>
+						</div>
+					</div>
+				</header>
+				<div class="student-list-container">
+					<ul class="studentList" style="padding:0px;cursor: pointer;list-style-type: none;">
+						<li ng-repeat="student in students" ng-click="showStudentData(student)">{{student.firstname+ ' ' +student.lastname}}</li>
+					</ul>
+				</div>	
+			</div> <!-- <div class="left-side-inner"> -->
+		</section> <!-- <section class="left-side-content"> -->
+
+		<div class="right-side-content">
+
+			<section class="student-information-container">
+				
+				<header class="text-right">
+					<button id="editStudentButton" class="btn btn-primary" ng-hide="showSaveButton" ng-click="showSaveButton = true">Edit</button>
+					<button id="updateStudentButton" class="btn btn-primary" ng-show="showSaveButton" ng-click="save()">Update</button>
+				</header>
+
+				<ul class="nav nav-tabs">
+				  <li class="active"><a data-toggle="tab" href="#personalInformation">Personal Information</a></li>
+				  <li><a data-toggle="tab" href="#addressInformation">Address</a></li>
+				  <li><a data-toggle="tab" href="#guardiansInformation">Guardian's information</a></li>
+				  <li><a data-toggle="tab" href="#subjectsInformation">Subject Enrolled</a></li>
+				</ul>
+
+				<form name="studentInformationForm" role="form">
+
+					<div class="tab-content">
+
+							<div id="personalInformation" class="tab-pane fade in active">
+
+								<div class="row">
+								
+									<h4>Personal Information</h4>
+									<div style="width: 100%;height: 2px;background-color: #000;margin: 8px auto;"></div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">First Name</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.firstname}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.firstname" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Last Name</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.lastname}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.lastname" />
+										</div>
+									</div>
+
+								</div> <!-- <div class="row"> -->
+
+								<div class="row">	
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Age</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.age}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.age" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Gender</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.gender}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.gender" />
+										</div>
+									</div>
+
+								</div> <!-- <div class="row"> -->	
+
+								<div class="row">
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Contact Number</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.contact_number}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.contact_number" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Country</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.country}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.country" />
+										</div>
+									</div>
+
+								</div> <!-- <div class="row"> -->	
+
+							</div> <!-- <div id="personalInformation" class="tab-pane fade in active"> -->
+
+							<div id="addressInformation" class="tab-pane fade">
+								
+								<div class="row">	
+									<h4>Address Information</h4>
+									<div style="width: 100%;height: 2px;background-color: #000;margin: 8px auto;"></div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Address 1</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.address1}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.address1" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Address 2</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.address2}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.address2" />
+										</div>
+									</div>
+
+								</div> <!-- <div class="row"> -->
+
+							</div> <!-- <div id="addressInformation" class="tab-pane fade"> -->
+
+							<div id="guardiansInformation" class="tab-pane fade">				
+
+								<div class="row">
+									
+									<h4>Guardians Information</h4>
+									<div style="width: 100%;height: 2px;background-color: #000;margin: 8px auto;"></div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">First Name</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.gLastname}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.gLastname" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Last Name</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.gFirstname}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.gFirstname" />
+										</div>
+									</div>
+
+								</div> <!-- <div class="row"> -->	
+
+								<div class="row">	
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Address</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.gAddress}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.gAddress" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label for="#">Contact Number</label>
+											<p class="displayedData" style="text-transform: capitalize;">{{studentData.gContactNumber}}</p>
+											<input class="form-control update-input" type="text" ng-model="studentData.gContactNumber" />
+										</div>
+									</div>
+
+								</div> <!-- <div class="row"> -->
+
+							</div> <!-- <div id="guardiansInformation" class="tab-pane fade in active"> -->
+
+							<div id="subjectsInformation" class="tab-pane fade">
+								
+								<span>Soon</span>
+
+							</div> <!-- <div id="subjectsInformation" class="tab-pane fade"> -->
+						
+					</div> <!-- <div class="tab-content"> -->
+
+				</form> <!-- <form name="studentInformationForm" role="form"> -->
+
+			</section> <!-- <div class="student-information-container"> -->
+			
+
+		</div> <!-- <div class="right-side-content"> -->
+
+		<div id="registrationSuccessModal" class="modal fade" role="dialog">
+
+			<div class="modal-dialog modal-sm">
+				
+				<div class="modal-content">
+					
+					<div class="modal-header">	
+						<button class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">{{modalData.modal_title}}</h4>
+					</div>
+
+					<div class="modal-body">
+						<p style="word-wrap: break-word;">{{modalData.modal_body_message}}</p>
+					</div>
+
+					<div class="modal-footer">
+						<button class="btn btn-primary" data-dismiss="modal">close</button>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div> <!-- <div id="registrationSuccessModal" class="modal fade" role="dialog"> -->
+
+		<div id="registerModal" class="modal fade" role="dialog">
+
+			<div class="modal-dialog">
+				
+				<div class="modal-content">
+					
+					<div class="modal-header">
+						<button class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Registration</h4>
+					</div>
+
+					<div class="modal-body">
+
+						<div class="breadcrumb-container">
+							<ol class="breadcrumb">
+								<li class="breadcrum-item active">Personal Information</li>
+								<li class="breadcrum-item">Address</li>
+								<li class="breadcrum-item">Guardians Information</li>
+							</ol>		
+						</div>
+						
+						<div class="modal-inner-content">
+							
+							<form name="registrationForm" id="registrationForm" role="form">
+
+								<div class="row personsalInfo">
+									<h4>Personal Informations</h4>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">First Name</label>
+											<input id="inputFirstname" class="input-registration" type="text" ng-model="studentData.firstname" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Last Name</label>
+											<input id="inputLastname" class="input-registration" type="text" ng-model="studentData.lastname" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Age</label>
+											<input id="inputAge" class="input-registration" type="text" ng-model="studentData.age" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Gender</label>
+											<input id="inputGender" class="input-registration" type="text" ng-model="studentData.gender" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Contact Number</label>
+											<input id="inputContactNumber" class="input-registration" type="text" ng-model="studentData.contact_number" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Country</label>
+											<input id="inputCountry" class="input-registration" type="text" ng-model="studentData.country" />
+										</div>
+									</div>
+									
+
+								</div> <!-- <div class="row"> -->
+
+								<div class="row addressInfo">
+									<h4>Address Informations</h4>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Address 1</label>
+											<input id="inputAddress1" class="input-registration" type="text" ng-model="studentData.address1" />
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Address 2</label>
+											<input id="inputAddress2" class="input-registration" type="text" ng-model="studentData.address2" />
+										</div>
+									</div>
+
+								</div> <!-- <div class="row"> -->
+
+								<div class="row guardiansInfo">
+									<h4>Guardians Informations</h4>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">First Name</label>
+											<input id="inputGuardianFirstname" class="input-registration" type="text" ng-model="studentData.gFirstname"/>
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Last Name</label>
+											<input id="inputGuardianLastname" class="input-registration" type="text" ng-model="studentData.gLastname"/>
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Address</label>
+											<input id="inputGuardianAddress" class="input-registration" type="text" ng-model="studentData.gAddress"/>
+										</div>
+									</div>
+
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="control-label" for="inputFirstname">Contact Number</label>
+											<input id="inputGuardianContactNum" class="input-registration" type="text" ng-model="studentData.gContactNumber"/>
+										</div>
+									</div>
+
+									<button id="addMoreGuardian" class="btn btn-primary">Add more guardian</button>
+
+								</div> <!-- <div class="row"> -->
+
+							</form>
+						</div>
+
+					</div>
+
+					<div class="modal-footer">
+						
+						<button class="registerModalCancelButton modalButtons" data-dismiss="modal" >Cancel</button>
+						<button class="registerModalPrevButton modalButtons">Prev</button>
+						<button class="registerModalNextButton modalButtons">Next</button>
+						<button class="registerModalSaveButton modalButtons" ng-click="save()">Save</button>
+
+					</div>
+
+
+				</div>
+
+
+			</div>			
+
+		</div> <!-- End for registerModal -->
+
+
+	</div> <!-- End for page wrapper -->
+
+
+	<script type="text/javascript" src="js/jquery/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/angularjs/angular.min.js"></script>
+
+	<!-- main-app -->
+	<script type="text/javascript" src="app/app.js"></script>
+
+	<!-- controllers -->
+	<script type="text/javascript" src="app/controllers/student-ctrl.js"></script>
+
+	<!-- services -->
+	<script type="text/javascript" src="app/services/student-service.js"></script>
+
+	<script>
+
+		function resetRegistrationData() {
+			$(".input-registration").val("");
+			//reset breadcrumb
+			$(".breadcrum-item.active").removeClass("active");
+			$(".breadcrum-item:nth-child(1)").addClass("active");
+			$('.registerModalSaveButton').css("display", "none");
+			$('.registerModalPrevButton').css("display", "none");
+			$('.registerModalCancelButton').css("display", "inline-block");
+			$('.registerModalNextButton').css("display", "inline-block");
+			$('.row.personsalInfo').show();
+			$('.row.addressInfo').hide();
+			$('.row.guardiansInfo').hide();
+		}
+
+		function showCurrentTab(currentTab, direction) {
+			//check if direction is prev or next
+			if(direction == "next") {
+				if(currentTab == "Personal Information") {
+					$('.row.personsalInfo').hide();
+					$('.row.addressInfo').show('slow');
+				} else if(currentTab == "Address") {
+					$('.row.addressInfo').hide();
+					$('.row.guardiansInfo').show('slow');
+				}
+			} else {
+				if(currentTab == "Guardians Information") {
+					$('.row.guardiansInfo').hide();
+					$('.row.addressInfo').show('slow');
+				} else if(currentTab == "Address") {
+					$('.row.addressInfo').hide();
+					$('.row.personsalInfo').show('slow');
+				}
+			}
+		}
+
+		function setBreadCrumbTabActive(currentTab, direction) {
+			//remove class active to the current active tab
+			$(".breadcrum-item.active").removeClass("active");
+			//check if direction is prev or next
+			if(direction == "next") {
+				if(currentTab == "Personal Information") {
+					$(".breadcrum-item:nth-child(2)").addClass("active");
+					$(".registerModalCancelButton").css("display", "none");
+					$(".registerModalPrevButton").css("display", "inline-block");
+				} else if(currentTab == "Address") {				
+					$(".breadcrum-item:nth-child(3)").addClass("active");
+					$(".registerModalNextButton").css("display", "none");
+					$(".registerModalSaveButton").css("display", "inline-block");
+				}
+			} else {
+				if(currentTab == "Guardians Information") {
+					$(".breadcrum-item:nth-child(2)").addClass("active");
+					$(".registerModalSaveButton").css("display", "none");
+					$(".registerModalNextButton").css("display", "inline-block");
+				} else if(currentTab == "Address") {
+					console.debug("address");
+					$(".breadcrum-item:nth-child(1)").addClass("active");
+					$(".registerModalPrevButton").css("display", "none");
+					$(".registerModalCancelButton").css("display", "inline-block");
+				}
+			}
+
+			showCurrentTab(currentTab, direction);
+
+		}
+		
+		$(document).ready(function() {
+
+			var activeTab;
+
+			//Register button functions
+			$(".registerButton").on('click', function() {
+				resetRegistrationData();
+				$("#registerModal").modal('show');
+				//Hide student information if adding new student
+				$('.student-information-container').css('display', 'none');
+				//cache the current active tab in breadcrumb
+				activeTab = document.getElementsByClassName("breadcrum-item active")[0].innerHTML;
+			});
+			
+			$(".registerModalNextButton").on('click', {activeTab}, function() {
+				setBreadCrumbTabActive(activeTab, "next");
+				activeTab = document.getElementsByClassName("breadcrum-item active")[0].innerHTML;
+			});
+
+			$(".registerModalPrevButton").on('click', {activeTab}, function() {
+				setBreadCrumbTabActive(activeTab, "prev");
+				activeTab = document.getElementsByClassName("breadcrum-item active")[0].innerHTML;
+			});
+
+			$('#editStudentButton').on('click', function() {
+				var currentButtonState = $(this).text();
+				if(currentButtonState == "Edit") {
+					$('.update-input').css('display', 'block');
+					$('.displayedData').css('display', 'none');
+				} else {
+					$('.update-input').css('display', 'none');
+					$('.displayedData').css('display', 'block');
+				}
+	
+			});
+
+			$('.studentList').on('click', 'li', function() {
+				$('.studentList li.selected').removeClass('selected');
+				$(this).addClass('selected')
+			});
+
+		});
+
+
+	</script>
+
+</body>
+</html>
